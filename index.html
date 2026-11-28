@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1e5bd8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'self' https://api.github.com; base-uri 'none'; form-action 'none'">
+  <link rel="icon" href="data:,">
+  <title>CCET Stock</title>
+  <link rel="stylesheet" href="style.css?v=19f93669">
+</head>
+<body>
+
+  <!-- ===== หน้าล็อกอิน ===== -->
+  <section id="loginView" class="login" hidden>
+    <form id="loginForm" class="login-card" autocomplete="on">
+      <div class="login-logo">CCET Stock</div>
+      <p class="login-sub">กรุณาใส่รหัสผ่านเพื่อดูข้อมูล Stock</p>
+      <input id="loginPassword" type="password" placeholder="รหัสผ่าน" autocomplete="current-password" required>
+      <label class="remember"><input id="rememberMe" type="checkbox" checked> จำไว้ในเครื่องนี้ (ไม่ต้องใส่รหัสทุกครั้ง)</label>
+      <button id="loginBtn" type="submit">เข้าสู่ระบบ</button>
+      <p id="loginError" class="login-error" hidden></p>
+    </form>
+  </section>
+
+  <!-- ===== หน้าหลัก ===== -->
+  <section id="mainView" hidden>
+    <header class="topbar">
+      <div class="topbar-row">
+        <div>
+          <div class="title">CCET Stock</div>
+          <div id="syncedAt" class="subtitle">กำลังโหลด ...</div>
+        </div>
+        <div class="header-btns">
+          <button id="thumbBtn" class="icon-btn" type="button" aria-pressed="true">🖼 รูป</button>
+          <button id="priceBtn" class="icon-btn" type="button" hidden>🔒 ผู้ดูแล</button>
+          <button id="logoutBtn" class="icon-btn" type="button" aria-label="ออกจากระบบ">ออก</button>
+        </div>
+      </div>
+      <div id="staleBanner" class="banner" hidden>⚠ ข้อมูลยังไม่ได้อัปเดตตามรอบ อาจไม่ใช่ข้อมูลล่าสุด</div>
+      <div class="search-wrap">
+        <input id="searchBox" type="search" placeholder="ค้นหา Part / Description / Spec / Location"
+               autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="search">
+      </div>
+      <div class="filter-row">
+        <div id="areaChips" class="area-chips"></div>
+        <select id="statusSelect" aria-label="สถานะ"></select>
+      </div>
+    </header>
+
+    <main>
+      <div id="resultInfo" class="result-info"></div>
+      <div id="list" class="list"></div>
+      <div id="sentinel" class="sentinel"></div>
+      <div id="emptyMsg" class="empty" hidden>ไม่พบรายการที่ค้นหา</div>
+    </main>
+  </section>
+
+  <!-- ===== หน้ารายละเอียด ===== -->
+  <section id="detailView" class="detail" hidden>
+    <div class="detail-bar">
+      <button id="detailBack" class="back-btn" type="button">‹ กลับ</button>
+      <div id="detailTitle" class="detail-title"></div>
+    </div>
+    <div class="detail-body">
+      <div id="photoBox" class="photo-box">
+        <img id="detailPhoto" alt="รูป Part">
+        <div id="noPhoto" class="no-photo" hidden>ไม่มีรูป</div>
+      </div>
+      <div id="photoActions" class="photo-actions" hidden>
+        <button id="takePhotoBtn" class="photo-btn" type="button">📷 ถ่ายรูป</button>
+        <input id="photoInput" type="file" accept="image/*" capture="environment" hidden>
+        <p id="photoStatus" class="photo-status" hidden></p>
+      </div>
+      <div id="detailStatus" class="badge big"></div>
+      <dl id="detailFields" class="fields"></dl>
+    </div>
+  </section>
+
+  <!-- ===== ปลดล็อกราคา ===== -->
+  <div id="priceView" class="modal" hidden>
+    <form id="priceForm" class="login-card" autocomplete="off">
+      <div class="login-logo">🔑 ผู้ดูแล</div>
+      <p class="login-sub">ใส่รหัสผ่านผู้ดูแล (Vendor / ราคา / ถ่ายรูป)</p>
+      <input id="pricePassword" type="password" placeholder="รหัสผ่านผู้ดูแล" autocomplete="off" required>
+      <label class="remember"><input id="priceRemember" type="checkbox" checked> จำไว้ในเครื่องนี้</label>
+      <button id="priceUnlockBtn" type="submit">ปลดล็อก</button>
+      <button id="priceCancel" class="secondary" type="button">ยกเลิก</button>
+      <p id="priceError" class="login-error" hidden></p>
+    </form>
+  </div>
+
+  <!-- ===== ดูรูปเต็มจอ ===== -->
+  <div id="zoomView" class="zoom" hidden>
+    <img id="zoomImg" alt="รูป Part">
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="app.js?v=38210eca"></script>
+</body>
+</html>
